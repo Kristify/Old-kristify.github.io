@@ -10,8 +10,8 @@ createApp({
       storageFields: 1,
       noMetaname: '',
       nonexistantItem: '',
-      notEnogthMoney: '',
-      notEnogthStock: '',
+      notenoughMoney: '',
+      notenoughStock: '',
       change: '',
       startedSound: '',
       purchaseSound: '',
@@ -45,8 +45,8 @@ ${this.getStorage()}
   messages = {
     noMetaname      = "${this.noMetaname}",
     nonexistantItem = "${this.nonexistantItem}",
-    notEnogthMoney  = "${this.notEnogthMoney}",
-    notEnogthStock  = "${this.notEnogthStock}",
+    notenoughMoney  = "${this.notenoughMoney}",
+    notenoughStock  = "${this.notenoughStock}",
     change          = "${this.change}"
   },
   webhooks = {
