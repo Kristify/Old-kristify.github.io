@@ -13,12 +13,7 @@
     />
   </head>
   <body>
-    <div
-      class="modal modal-signin position-static d-block bg-secondary py-5"
-      tabindex="-1"
-      role="dialog"
-      id="modalSignin"
-    >
+    <div class="modal position-static d-block bg-info py-5" tabindex="-1" role="dialog" id="main">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content rounded-4 shadow">
           <div class="modal-body p-5 pt-0 pb-0">
@@ -30,7 +25,7 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="pkeyInput" />
+              <input type="text" class="form-control rounded-3" id="pkeyInput" v-model="pkey" />
               <label for="pkeyInput">Private key</label>
               <div class="form-text pt-0 pb-3">
                 In the
@@ -40,13 +35,13 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="nameInput" />
+              <input type="text" class="form-control rounded-3" id="nameInput" v-model="name" />
               <label for="nameInput">Krist name</label>
-              <div class="form-text pt-0 pb-3">The krist name you want your shop to manage</div>
+              <div class="form-text pt-0 pb-3">The krist name you want your shop to manage. Without .kst.</div>
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="selfInput" />
+              <input type="text" class="form-control rounded-3" id="selfInput" v-model="self" />
               <label for="selfInput">Turtle network name</label>
               <div class="form-text pt-0 pb-3">The network name of the turtle</div>
             </div>
@@ -57,15 +52,15 @@
               <h3 class="pb-3">Storage</h3>
             </div>
 
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="chestID" />
+            <div class="form-floating mb-3" v-for="index in storageFields">
+              <input type="text" class="form-control rounded-3" id="chestID" v-model="this.storage[index - 1]" />
               <label for="chestID">Chest network name</label>
               <div class="form-text pt-0 pb-3">The network name of a storage chest</div>
             </div>
 
             <div class="btn-group pb-4" role="group">
-              <button type="button" class="btn btn-primary">Add another field</button>
-              <button type="button" class="btn btn-danger">Remove a field</button>
+              <button type="button" class="btn btn-primary" @click="storageFields++">Add another field</button>
+              <button type="button" class="btn btn-danger" @click="storageFields--">Remove a field</button>
             </div>
 
             <hr />
@@ -75,31 +70,31 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="noMetaname" />
+              <input type="text" class="form-control rounded-3" id="noMetaname" v-model="noMetaname" />
               <label for="noMetaname">No metaname</label>
               <div class="form-text pt-0 pb-3">Message to send when user didn't supply metaname</div>
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="nonexistantItem" />
+              <input type="text" class="form-control rounded-3" id="nonexistantItem" v-model="nonexistantItem" />
               <label for="nonexistantItem">Nonexistant Item</label>
               <div class="form-text pt-0 pb-3">Message to send when item the user wanted does not exist</div>
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="notEnogthMoney" />
+              <input type="text" class="form-control rounded-3" id="notEnogthMoney" v-model="notEnogthMoney" />
               <label for="notEnogthMoney">Not enogth money</label>
               <div class="form-text pt-0 pb-3">Message to send when the user didn't send enogth money</div>
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="notEnogthStock" />
+              <input type="text" class="form-control rounded-3" id="notEnogthStock" v-model="notEnogthStock" />
               <label for="notEnogthStock">Not enogth stock</label>
               <div class="form-text pt-0 pb-3">Message to send when the shop dosen't have enogth stock</div>
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="change" />
+              <input type="text" class="form-control rounded-3" id="change" v-model="change" />
               <label for="change">Change</label>
               <div class="form-text pt-0 pb-3">Message to send along with the change</div>
             </div>
@@ -111,19 +106,19 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="sfxStarted" />
+              <input type="text" class="form-control rounded-3" id="sfxStarted" v-model="startedSound" />
               <label for="sfxStarted">Started</label>
               <div class="form-text pt-0 pb-3">Sound to play when the shop gets started</div>
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="sfxPurchase" />
+              <input type="text" class="form-control rounded-3" id="sfxPurchase" v-model="purchaseSound" />
               <label for="sfxPurchase">Purchase</label>
               <div class="form-text pt-0 pb-3">Sound to play when there was a purchase</div>
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="sfxError" />
+              <input type="text" class="form-control rounded-3" id="sfxError" v-model="errorSound" />
               <label for="sfxError">Error</label>
               <div class="form-text pt-0 pb-3">Sound to play when there was a error</div>
             </div>
@@ -136,18 +131,22 @@
 
             <div class="input-group mb-3 pb-4">
               <div class="container w-auto">
-                <select class="form-select">
-                  <option selected>Webhook Type</option>
-                  <option value="1">Discord (embed)</option>
-                  <option value="2">Discord Classic</option>
-                  <option value="3">Google Chat</option>
+                <select class="form-select" v-model="webhookType">
+                  <option selected value="1">Webhook Type</option>
+                  <option value="discord-modern">Discord (embed)</option>
+                  <option value="discord">Discord Classic</option>
+                  <option value="googleChat">Google Chat</option>
                 </select>
               </div>
 
-              <input type="text" class="form-control rounded-3" id="webhookURL" placeholder="URL" />
+              <input type="text" class="form-control rounded-3" id="webhookURL" placeholder="URL" v-model="webhook" />
             </div>
 
-            <button type="button" class="btn btn-primary mb-5">Generate config</button>
+            <hr />
+
+            <button type="button" class="btn btn-primary mb-5" @click="generate">Generate config</button>
+
+            <pre>{{result}}</pre>
           </div>
         </div>
       </div>
@@ -158,6 +157,7 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
-    <script defer src="script.js"></script>
+
+    <script defer type="module" src="script.js"></script>
   </body>
 </html>
