@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width='device-width', initial-scale=1.0" />
+    <title>Kristify Configurator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div
+      class="modal modal-signin position-static d-block bg-secondary py-5"
+      tabindex="-1"
+      role="dialog"
+      id="modalSignin"
+    >
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-body p-5 pt-0 pb-0">
+            <div class="modal-header p-5 pb-1 border-bottom-0">
+              <h1 class="fw-bold mb-0 fs-2">Kristify Configurator</h1>
+            </div>
+            <div class="modal-header pt-0 p-5 pb-1 border-bottom-0">
+              <h3 class="pb-3">General</h3>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="pkeyInput" />
+              <label for="pkeyInput">Private key</label>
+              <div class="form-text pt-0 pb-3">
+                In the
+                <a href="https://docs.krist.dev/docs/wallet-formats.html#kristwallet-format">kristwallet format.</a>
+                We will never share your privatekey with anyone, nor should you!
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="nameInput" />
+              <label for="nameInput">Krist name</label>
+              <div class="form-text pt-0 pb-3">The krist name you want your shop to manage</div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="selfInput" />
+              <label for="selfInput">Turtle network name</label>
+              <div class="form-text pt-0 pb-3">The network name of the turtle</div>
+            </div>
+
+            <hr />
+
+            <div class="modal-header pt-0 p-5 pb-1 border-bottom-0">
+              <h3 class="pb-3">Storage</h3>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="chestID" />
+              <label for="chestID">Chest network name</label>
+              <div class="form-text pt-0 pb-3">The network name of a storage chest</div>
+            </div>
+
+            <div class="btn-group pb-4" role="group">
+              <button type="button" class="btn btn-primary">Add another field</button>
+              <button type="button" class="btn btn-danger">Remove a field</button>
+            </div>
+
+            <hr />
+
+            <div class="modal-header pt-2 p-5 pb-1 border-bottom-0">
+              <h3 class="pb-3">Messages</h3>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="noMetaname" />
+              <label for="noMetaname">No metaname</label>
+              <div class="form-text pt-0 pb-3">Message to send when user didn't supply metaname</div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="nonexistantItem" />
+              <label for="nonexistantItem">Nonexistant Item</label>
+              <div class="form-text pt-0 pb-3">Message to send when item the user wanted does not exist</div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="notEnogthMoney" />
+              <label for="notEnogthMoney">Not enogth money</label>
+              <div class="form-text pt-0 pb-3">Message to send when the user didn't send enogth money</div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="notEnogthStock" />
+              <label for="notEnogthStock">Not enogth stock</label>
+              <div class="form-text pt-0 pb-3">Message to send when the shop dosen't have enogth stock</div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="change" />
+              <label for="change">Change</label>
+              <div class="form-text pt-0 pb-3">Message to send along with the change</div>
+            </div>
+
+            <hr />
+
+            <div class="modal-header pt-2 p-5 pb-1 border-bottom-0">
+              <h3 class="pb-3">Sounds</h3>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="sfxStarted" />
+              <label for="sfxStarted">Started</label>
+              <div class="form-text pt-0 pb-3">Sound to play when the shop gets started</div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="sfxPurchase" />
+              <label for="sfxPurchase">Purchase</label>
+              <div class="form-text pt-0 pb-3">Sound to play when there was a purchase</div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="sfxError" />
+              <label for="sfxError">Error</label>
+              <div class="form-text pt-0 pb-3">Sound to play when there was a error</div>
+            </div>
+
+            <hr />
+
+            <div class="modal-header pt-2 p-5 pb-1 border-bottom-0">
+              <h3 class="pb-3">Webhooks</h3>
+            </div>
+
+            <div class="input-group mb-3 pb-4">
+              <div class="container w-auto">
+                <select class="form-select">
+                  <option selected>Webhook Type</option>
+                  <option value="1">Discord (embed)</option>
+                  <option value="2">Discord Classic</option>
+                  <option value="3">Google Chat</option>
+                </select>
+              </div>
+
+              <input type="text" class="form-control rounded-3" id="webhookURL" placeholder="URL" />
+            </div>
+
+            <button type="button" class="btn btn-primary mb-5">Generate config</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="script.js"></script>
+  </body>
+</html>
